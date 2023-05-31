@@ -12,13 +12,13 @@ pip install -r requirements.txt
 Создайте бота в телеграм с помощью https://t.me/BotFather.
 Создайте файл `.env` с переменными окружения в папке проекта:
 - DVMN_TOKEN= токен доступа к [API Devman](https://dvmn.org/api/docs/)  
-- BOT_TOKEN= токен бота
-- CHAT_ID=  id Вашей учетной записи в телеграм, можно узнать https://telegram.me/userinfobot
+- TG_BOT_TOKEN= токен бота
+- TC_CHAT_ID=  id Вашей учетной записи в телеграм, можно узнать https://telegram.me/userinfobot
 
 ## Как использовать
 Запустить бот:
 ```commandline
-python3 dvmn_bot.py 
+python3 dvmn-bot.py 
 ```
 
 Как только работа будет проверена, бот пришлёт Вам оповещение, например:
