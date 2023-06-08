@@ -3,14 +3,17 @@ import dotenv
 import os
 import time
 import telegram
+import logging
 
 
 def main():
+    logging.basicConfig(level=logging.INFO)
     dotenv.load_dotenv()
     dvmn_token = os.environ['DVMN_TOKEN']
     bot_token = os.environ['TG_BOT_TOKEN']
     chat_id = os.environ['TC_CHAT_ID']
     bot = telegram.Bot(token=bot_token)
+    logging.info('start bot')
     url = 'https://dvmn.org/api/long_polling/'
     headers = {'Authorization': f'Token {dvmn_token}'}
     timestamp = time.time()
