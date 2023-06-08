@@ -20,7 +20,7 @@ def main():
         def emit(self, record):
             bot.send_message(chat_id=chat_id,
                              text=f'{record}')
-    logger = logging.getLogger('notes')
+    logger = logging.getLogger('dvmn-bot')
     logger.setLevel(logging.INFO)
     logger.addHandler(LogTgHandler())
     logger.info('start bot')
