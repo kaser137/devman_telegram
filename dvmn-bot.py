@@ -5,7 +5,6 @@ import time
 import telegram
 import logging
 
-
 logger = logging.getLogger(__file__)
 
 
@@ -14,13 +13,13 @@ class LogTgHandler(logging.Handler):
         super().__init__()
         self.chat_id = chat_id
         self.tg_bot = tg_bot
+
     def emit(self, record):
         log_entry = self.format(record)
         self.tg_bot.send_message(chat_id=self.chat_id, text=log_entry)
 
 
 def main():
-    logging.basicConfig(level=logging.INFO)
     dotenv.load_dotenv()
     dvmn_token = os.environ['DVMN_TOKEN']
     bot_token = os.environ['TG_BOT_TOKEN']
