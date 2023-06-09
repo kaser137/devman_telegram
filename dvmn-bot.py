@@ -33,30 +33,27 @@ def main():
     timestamp = time.time()
     while 1:
         try:
-            try:
-                response = requests.get(url, headers=headers, params={'timestamp': f'{timestamp}'}, timeout=91)
-                response.raise_for_status()
-                review_results = response.json()
-                if review_results['status'] == 'timeout':
-                    timestamp = review_results['timestamp_to_request']
+            response = requests.get(url, headers=headers, params={'timestamp': f'{timestamp}'}, timeout=91)
+            response.raise_for_status()
+            review_results = response.json()
+            if review_results['status'] == 'timeout':
+                timestamp = review_results['timestamp_to_request']
+            else:
+                timestamp = review_results['last_attempt_timestamp']
+                if review_results['new_attempts'][-1]['is_negative']:
+                    bot.send_message(chat_id=chat_id,
+                                     text=f'У Вас проверили работу: {review_results["new_attempts"][-1]["lesson_title"]}'
+                                          f'\nК сожалению, в работе нашлись ошибки')
+                    logger.info('работа не сдана')
                 else:
-                    timestamp = review_results['last_attempt_timestamp']
-                    if review_results['new_attempts'][-1]['is_negative']:
-                        bot.send_message(chat_id=chat_id,
-                                         text=f'У Вас проверили работу: {review_results["new_attempts"][-1]["lesson_title"]}'
-                                              f'\nК сожалению, в работе нашлись ошибки')
-                        logger.info('работа не сдана')
-                    else:
-                        bot.send_message(chat_id=chat_id,
-                                         text=f'У Вас проверили работу: {review_results["new_attempts"][-1]["lesson_title"]}'
-                                              f'\nПреподавателю все понравилось, можно приступать к следующему уроку')
-                        logger.info('работа сдана')
-            except requests.exceptions.ConnectionError as err:
-                print('connection error, next attempt in 5 seconds')
-                logger.exception(err, exc_info=True)
-                time.sleep(5)
-            except requests.exceptions.ReadTimeout as err:
-                logger.exception(err, exc_info=True)
+                    bot.send_message(chat_id=chat_id,
+                                     text=f'У Вас проверили работу: {review_results["new_attempts"][-1]["lesson_title"]}'
+                                          f'\nПреподавателю все понравилось, можно приступать к следующему уроку')
+                    logger.info('работа сдана')
+        except requests.exceptions.ConnectionError as err:
+            print('connection error, next attempt in 5 seconds')
+            logger.exception(err, exc_info=True)
+            time.sleep(5)
         except Exception as err:
             logger.exception(err, exc_info=True)
             time.sleep(5)
