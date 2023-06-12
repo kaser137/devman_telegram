@@ -54,6 +54,9 @@ def main():
             print('connection error, next attempt in 5 seconds')
             logger.exception(err, exc_info=True)
             time.sleep(5)
+        except requests.exceptions.ReadTimeout:
+            logger.debug('error ReadTimeout')
+            continue
         except Exception as err:
             logger.exception(err, exc_info=True)
             time.sleep(5)
