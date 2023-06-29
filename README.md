@@ -48,7 +48,7 @@ docker start <name_of_container>
 ```commandline
 docker stop <name_of_container>
 ```
-- Часто помогает командп:
+- Часто помогает команда:
 ```commandline
 docker --help
 ```
