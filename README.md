@@ -29,7 +29,7 @@ python3 dvmn-bot.py
 
 # Часть 2. Докеризация.
 
-## Как создать и запустить контейнер
+## Как создать и запустить контейнер.
 - Установите Докер с сайта [docker.com](https://www.docker.com/)
 - Создайте образ из директории проекта командой в терминале:
 ```commandline
@@ -38,15 +38,17 @@ docker build -t <name_of_image:tag(default=latest)> .
 - не забудьте поставить точку, или путь к файлу Dockerfile
 - Создайте контейнер командой в терминале:
 ```commandline
-docker create --name <name_of_container> <name_of_image:tag(default=latest)>
+docker run --env-file .env --name <name_of_container> <name_of_image:tag(default=latest)>
 ```
-- Запустите контейнер командой:
-```commandline
-docker start <name_of_container>
-```
+вместо .env надо указать ссылку на файл .env, в случае если Вы находитесь в разных директориях. 
+- Контейнер с именем `<name_of_container> ` создан и запущенб, бот работает.
 - Для остановки контейнера наберите команду:
 ```commandline
 docker stop <name_of_container>
+```
+- Для следующего запуска контейнера достаточно команды:
+```commandline
+docker start <name_of_container>
 ```
 - Часто помогает команда:
 ```commandline
