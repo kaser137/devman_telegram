@@ -38,7 +38,7 @@ docker build -t <name_of_image:tag(default=latest)> .
 - не забудьте поставить точку, или путь к файлу Dockerfile
 - Создайте контейнер командой в терминале:
 ```commandline
-docker run --env-file .env --name <name_of_container> <name_of_image:tag(default=latest)>
+docker run -d --env-file .env --name <name_of_container> <name_of_image:tag(default=latest)>
 ```
 вместо .env надо указать ссылку на файл .env, в случае если Вы находитесь в разных директориях. 
 - Контейнер с именем `<name_of_container> ` создан и запущенб, бот работает.
