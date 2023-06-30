@@ -41,7 +41,7 @@ docker build -t <name_of_image:tag(default=latest)> .
 docker run -d --env-file .env --name <name_of_container> <name_of_image:tag(default=latest)>
 ```
 вместо .env надо указать ссылку на файл .env, в случае если Вы находитесь в разных директориях. 
-- Контейнер с именем `<name_of_container> ` создан и запущенб, бот работает.
+- Контейнер с именем `<name_of_container> ` создан и запущен, бот работает.
 - Для остановки контейнера наберите команду:
 ```commandline
 docker stop <name_of_container>
